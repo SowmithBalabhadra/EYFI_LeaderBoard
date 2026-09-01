@@ -2,6 +2,10 @@
 
 The supplied EYFI leaderboard frontend is connected to a lightweight Express API with mock JSON data.
 
+## Demo Video
+
+[Watch the EYFI Leaderboard Demo](https://drive.google.com/file/d/1kvCDY0F3uZhFr0mmBAjSHH8ZdxM14kjN/view?usp=sharing)
+
 ## Run
 
 Requires Node.js 18+.
