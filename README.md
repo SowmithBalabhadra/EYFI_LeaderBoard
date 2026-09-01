@@ -1,4 +1,4 @@
-# EYFI Leaderboard — Full-Stack Mock
+# EYFI Leaderboard
 
 The supplied EYFI leaderboard frontend is connected to a lightweight Express API with mock JSON data.
 
