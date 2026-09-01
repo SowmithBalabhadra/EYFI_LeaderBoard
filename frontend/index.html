@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EYFI Leaderboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void:#0A0A0A;
+    --bg-surface:#151512;
+    --bg-surface-raised:#1D1D19;
+    --lime:#D7FF3D;
+    --lime-wash:rgba(215,255,61,0.07);
+    --text-primary:#F5F4EF;
+    --text-muted:#8C8C86;
+    --text-faint:#5C5C56;
+    --line:#26261F;
+    --down:#8A8579;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg-void);
+    color:var(--text-primary);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding-bottom:100px;
+  }
+  .wrap{width:92%;max-width:1400px;margin:0 auto;padding:28px 0 56px}
+
+  .topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:26px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    font-family:'Archivo Black',sans-serif; font-size:15px; letter-spacing:0.02em;
+    color:var(--bg-void); background:var(--lime); padding:5px 9px; border-radius:6px; line-height:1;
+  }
+  .brand-sub{font-size:12px; color:var(--text-muted);}
+  .day-count{font-size:13px; color:var(--text-muted); text-align:right;}
+  .day-count b{color:var(--text-primary); font-weight:700;}
+
+  .hero{margin-bottom:16px;}
+  .hero h1{font-family:'Archivo Black',sans-serif; font-size:38px; line-height:1.05; letter-spacing:-0.01em; max-width:640px;}
+  .hero h1 span{color:var(--lime);}
+  .hero p{color:var(--text-muted); font-size:14px; margin-top:8px;}
+
+  .progress-row{display:flex; align-items:center; gap:12px; margin:18px 0 26px;}
+  .progress-track{flex:1; height:6px; background:var(--bg-surface); border-radius:4px; overflow:hidden;}
+  .progress-fill{height:100%; background:var(--lime); border-radius:4px; width:46%;}
+  .progress-label{font-size:11.5px; color:var(--text-muted); white-space:nowrap;}
+
+  .climbers{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px;}
+  .climb-chip{
+    display:flex; align-items:center; gap:6px;
+    background:var(--bg-surface); border:1px solid var(--line); border-radius:20px;
+    padding:6px 12px; font-size:12px; color:var(--text-muted);
+  }
+  .climb-chip b{color:var(--text-primary); font-weight:600;}
+  .climb-chip .up{color:var(--lime); font-weight:700;}
+
+  .tabs{display:flex; gap:22px; border-bottom:1px solid var(--line); margin-bottom:22px;}
+  .tab{
+    padding:10px 2px 12px; font-size:13.5px; font-weight:600; color:var(--text-muted);
+    cursor:pointer; user-select:none; border-bottom:2px solid transparent; margin-bottom:-1px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .tab .count{font-size:11px; color:var(--text-faint); font-weight:600;}
+  .tab.active{color:var(--text-primary); border-color:var(--lime);}
+  .tab.active .count{color:var(--lime);}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translate(-50%,120px);
+  background:var(--lime);
+  color:var(--bg-void);
+  padding:12px 18px;
+  font-size:13px;
+  font-weight:700;
+  border-radius:8px;
+  z-index:100;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+  transition:transform .25s ease;
+  pointer-events:none;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;align-items:start}
+  @media (max-width:860px){ .layout{grid-template-columns:1fr;} .sidebar{order:2;} .main{order:1;} }
+
+  /* Podium */
+  .podium{display:grid; grid-template-columns:1fr 1fr 1fr; align-items:end; gap:10px; margin-bottom:26px;}
+  .pod-card{background:var(--bg-surface); border:1px solid var(--line); border-radius:12px; padding:16px 10px 14px; text-align:center; cursor:pointer;}
+  .pod-card.rank1{order:2; padding-top:22px; border-color:var(--lime); background:var(--bg-surface-raised);}
+  .pod-card.rank2{order:1;} .pod-card.rank3{order:3;}
+  .pod-rank{font-family:'Archivo Black',sans-serif; font-size:12px; color:var(--text-muted); margin-bottom:8px;}
+  .rank1 .pod-rank{color:var(--lime);}
+  .pod-avatar{width:48px; height:48px; border-radius:50%; background:var(--bg-void); border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; margin:0 auto 10px;}
+  .rank1 .pod-avatar{width:58px; height:58px; border-color:var(--lime); font-size:17px;}
+  .pod-name{font-size:12.5px; font-weight:600; margin-bottom:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .pod-amt{font-family:'Archivo Black',sans-serif; font-size:16px; color:var(--lime);}
+  .rank1 .pod-amt{font-size:20px;}
+  .pod-tag{font-size:10.5px; color:var(--text-muted); margin-top:3px;}
+
+  .zone-label{
+    display:flex; align-items:center; gap:10px; margin:6px 0 4px; font-size:11px; color:var(--text-faint);
+    text-transform:none;
+  }
+  .zone-label::after{content:""; flex:1; height:1px; background:var(--line);}
+
+  /* List */
+  .list{display:flex; flex-direction:column;}
+  .row{
+    display:flex; align-items:center; gap:12px; padding:12px 6px;
+    border-bottom:1px solid var(--line); cursor:pointer;
+  }
+  .row:hover{background:var(--lime-wash);}
+  .row.prize-zone{background:var(--lime-wash);}
+  .row.you-row{border:1.5px solid var(--lime); border-radius:10px; padding:12px 10px; background:var(--bg-surface-raised); margin:4px 0;}
+  .row-rank{font-family:'Archivo Black',sans-serif; font-size:15px; color:var(--text-muted); width:28px; flex-shrink:0;}
+  .you-row .row-rank{color:var(--lime);}
+  .row-avatar{width:36px; height:36px; border-radius:50%; background:var(--bg-surface-raised); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; flex-shrink:0;}
+  .row-mid{flex:1; min-width:0;}
+  .row-name{font-size:14px; font-weight:600; display:flex; align-items:center; gap:6px;}
+  .you-tag{font-size:10px; font-weight:700; color:var(--bg-void); background:var(--lime); padding:1px 6px; border-radius:4px;}
+  .row-cat{font-size:11.5px; color:var(--text-muted); margin-top:1px;}
+  .row-right{text-align:right; flex-shrink:0;}
+  .row-amt{font-size:14.5px; font-weight:700;}
+  .row-move{font-size:11px; margin-top:2px; font-weight:600; display:flex; align-items:center; justify-content:flex-end; gap:3px;}
+  .move-up{color:var(--lime);} .move-down{color:var(--down);} .move-flat{color:var(--text-muted);}
+
+  .row-detail{max-height:0; overflow:hidden; transition:max-height .2s ease; font-size:12.5px; color:var(--text-muted);}
+  .row-detail.open{max-height:70px; padding-top:10px; margin-top:10px; border-top:1px solid var(--line);}
+  .streak{display:inline-flex; align-items:center; gap:5px; background:var(--bg-surface-raised); border:1px solid var(--line); padding:2px 8px; border-radius:20px; color:var(--lime); font-weight:600; font-size:11px; margin-top:6px;  margin-bottom:10px; width:fit-content;}
+
+  .skip-row{text-align:center; padding:10px 0; color:var(--text-faint); font-size:16px; letter-spacing:2px;}
+
+  /* Sidebar */
+  .sidebar{position:sticky; top:20px; display:flex; flex-direction:column; gap:16px;}
+  .card{background:var(--bg-surface); border:1px solid var(--line); border-radius:12px; padding:16px;}
+  .card-label{font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); font-weight:700; margin-bottom:12px;}
+
+  .race-row{display:flex; align-items:center; gap:10px; padding:8px 0;}
+  .race-row.me{background:var(--lime-wash); border-radius:8px; padding:8px; margin:2px 0;}
+  .race-rank{font-family:'Archivo Black',sans-serif; font-size:13px; color:var(--text-muted); width:22px;}
+  .race-row.me .race-rank{color:var(--lime);}
+  .race-avatar{width:28px; height:28px; border-radius:50%; background:var(--bg-surface-raised); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600;}
+  .race-name{font-size:12.5px; font-weight:600; flex:1;}
+  .race-amt{font-size:12.5px; font-weight:700;}
+
+  .overtake{
+    margin-top:12px; padding:12px; background:var(--bg-surface-raised); border-radius:10px;
+    font-size:13px; line-height:1.5;
+  }
+  .overtake b{color:var(--lime); font-family:'Archivo Black',sans-serif; font-size:15px;}
+
+  .log-form{margin-top:14px; display:flex; gap:8px;}
+  .log-form input{
+    flex:1; background:var(--bg-void); border:1px solid var(--line); border-radius:8px;
+    color:var(--text-primary); padding:9px 10px; font-size:13px; font-family:'Inter',sans-serif;
+  }
+  .log-form input:focus{outline:none; border-color:var(--lime);}
+  .log-form button{
+    background:var(--lime); color:var(--bg-void); border:none; border-radius:8px;
+    padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif;
+  }
+  .log-form button:active{transform:scale(0.97);}.log-form button:disabled{opacity:.6;cursor:wait;}
+  .log-error{font-size:11.5px; color:#E0897A; margin-top:6px; display:none;}
+
+  .climb-list{display:flex; flex-direction:column; gap:10px;}
+  .climb-item{display:flex; align-items:center; gap:10px;}
+  .climb-item .race-avatar{flex-shrink:0;}
+  .climb-item .info{flex:1; min-width:0;}
+  .climb-item .name{font-size:12.5px; font-weight:600;}
+  .climb-item .jump{font-size:11px; color:var(--lime); font-weight:700;}
+
+  .flash{animation:flashRow .9s ease;}
+  @keyframes flashRow{
+    0%{box-shadow:0 0 0 2px var(--lime);}
+    100%{box-shadow:0 0 0 0px transparent;}
+  }
+
+  @media (max-width:480px){ .hero h1{font-size:28px;} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">EYFI</div>
+      <div class="brand-sub">Wave 01 &middot; Student Earning Challenge</div>
+    </div>
+    <div class="day-count">Day <b id="dayNow">14</b> of <b>30</b></div>
+  </div>
+
+  <div class="hero">
+    <h1>&#8377;2,00,000 in prizes.<br>Every rupee moves you <span>up</span>.</h1>
+    <p>Ranked live by total income earned during the challenge.</p>
+  </div>
+
+  <div class="progress-row">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">16 days left</div>
+  </div>
+
+  <div class="climbers" id="climbersStrip"></div>
+
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-tab="overall">Overall <span class="count" id="cnt-overall"></span></div>
+    <div class="tab" data-tab="solo">Solo <span class="count" id="cnt-solo"></span></div>
+    <div class="tab" data-tab="team">Team <span class="count" id="cnt-team"></span></div>
+  </div>
+
+  <div class="layout">
+    <div class="main">
+      <div id="podium" class="podium"></div>
+      <div id="list" class="list"></div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card">
+        <div class="card-label">Your race</div>
+        <div id="raceBlock"></div>
+        <div class="overtake" id="overtakeBlock"></div>
+        <div class="log-form">
+          <input type="text" id="logInput" placeholder="Amount earned today">
+          <button id="logBtn">Add</button>
+        </div>
+        <div class="log-error" id="logError">Enter a valid amount first.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Fastest climbers today</div>
+        <div class="climb-list" id="climbList"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function seeded(seed){ const x = Math.sin(seed*999)*10000; return x - Math.floor(x); }
+const CATS = ["Web development","Reels editing","SEO automation pipelines","Handmade jewellery","Drop shipping","Fitness coaching","Newsletter writing","Thrift reselling","App development","Tutoring","Print-on-demand merch","Bug bounty hunting","Baking and desserts","Podcast editing","Virtual assistance","No-code app building","Affiliate marketing","Resume and LinkedIn writing","AI chatbot building","Photography for events","Notes and study material selling","Freelance tech gigs"];
+const FIRST = ["Ananya","Karthik","Meera","Rohan","Divya","Aditya","Sneha","Vikram","Priya","Ishaan","Neha","Arjun","Kavya","Yash","Riya","Aarav","Tanvi","Dev","Simran","Aryan","Pooja","Manav","Nikita","Rahul","Sanya","Varun","Ira","Kabir","Zara","Om"];
+const LAST = ["Rao","Iyer","Nair","Verma","Sharma","Kulkarni","Pillai","Singh","Menon","Gupta","Reddy","Joshi","Chawla","Bose","Nambiar","Patel","Desai","Malhotra","Kapoor","Shetty"];
+
+let people = [];
+let YOU = null;
+
+const fmt = n => "\u20B9" + Math.round(n).toLocaleString("en-IN");
+
+function ranked(filter){
+  const pool = people.filter(p => filter==='overall' ? true : filter==='solo' ? !p.team : p.team);
+  const byToday = [...pool].sort((a,b)=>b.amt-a.amt);
+  const byYesterday = [...pool].sort((a,b)=>b.yesterdayAmt-a.yesterdayAmt);
+  const prevRankOf = {};
+  byYesterday.forEach((p,i)=>prevRankOf[p.id]=i+1);
+  return byToday.map((p,i)=>({...p, rank:i+1, prevRank:prevRankOf[p.id]}));
+}
+
+function moveHTML(rank, prevRank){
+  const diff = prevRank - rank;
+  if(diff > 0) return '<span class="move-up">&#9650; '+diff+'</span>';
+  if(diff < 0) return '<span class="move-down">&#9660; '+Math.abs(diff)+'</span>';
+  return '<span class="move-flat">&mdash;</span>';
+}
+
+const PRIZE_CUTOFF = 10;
+let currentTab = 'overall';
+
+function renderPodium(list){
+  const top3 = list.slice(0,3);
+  document.getElementById('podium').innerHTML = top3.map(p => `
+    <div class="pod-card rank${p.rank}">
+      <div class="pod-rank">#${p.rank}</div>
+      <div class="pod-avatar">${p.init}</div>
+      <div class="pod-name">${p.name}</div>
+      <div class="pod-amt" data-amt="${p.amt}">&#8377;0</div>
+      <div class="pod-tag">${p.cat}</div>
+    </div>
+  `).join('');
+  document.querySelectorAll('.pod-amt').forEach(node => {
+    const target = parseInt(node.dataset.amt,10);
+    let cur = 0; const step = Math.max(1, Math.round(target/24));
+    (function tick(){ cur = Math.min(target, cur+step); node.textContent = fmt(cur); if(cur<target) requestAnimationFrame(tick); })();
+  });
+}
+
+function rowHTML(p){
+  const isYou = !!p.isYou;
+  return `
+    <div class="row ${isYou?'you-row':''} ${p.rank<=PRIZE_CUTOFF && !isYou?'prize-zone':''}" data-id="${p.id}">
+      <div class="row-rank">${p.rank}</div>
+      <div class="row-avatar">${p.init}</div>
+      <div class="row-mid">
+        <div class="row-name">${p.name} ${isYou?'<span class="you-tag">You</span>':''}</div>
+        <div class="row-cat">${p.cat}</div>
+      </div>
+      <div class="row-right">
+        <div class="row-amt">${fmt(p.amt)}</div>
+        <div class="row-move">${moveHTML(p.rank, p.prevRank)}</div>
+      </div>
+    </div>
+    <div class="row-detail" data-detail="${p.id}">
+      Earning via ${p.cat.toLowerCase()}<br>
+      <span class="streak">&#9889; ${p.streak}-day streak</span>
+    </div>
+  `;
+}
+
+function renderList(list){
+  const rest = list.slice(3);
+  const you = list.find(p => p.isYou);
+  const el = document.getElementById('list');
+  let html = '';
+
+  const visibleTop = rest.filter(p => p.rank <= PRIZE_CUTOFF + 6);
+  html += visibleTop.map(rowHTML).join('');
+
+  if(you && you.rank > PRIZE_CUTOFF + 6){
+    html += '<div class="skip-row">&middot;&middot;&middot;</div>';
+    const windowStart = Math.max(PRIZE_CUTOFF+7, you.rank-1);
+    const windowEnd = you.rank+1;
+    const windowRows = rest.filter(p => p.rank>=windowStart && p.rank<=windowEnd);
+    html += windowRows.map(rowHTML).join('');
+  }
+
+  el.innerHTML = html;
+
+  el.querySelectorAll('.row').forEach(row => {
+    row.addEventListener('click', () => {
+      const id = row.dataset.id;
+      const detail = el.querySelector('.row-detail[data-detail="'+id+'"]');
+      detail.classList.toggle('open');
+    });
+  });
+}
+
+function renderRace(list){
+  const you = list.find(p=>p.isYou);
+  const idx = list.findIndex(p=>p.isYou);
+  const above = idx>0 ? list[idx-1] : null;
+  const below = idx<list.length-1 ? list[idx+1] : null;
+  const rows = [above, you, below].filter(Boolean);
+  document.getElementById('raceBlock').innerHTML = rows.map(p => `
+    <div class="race-row ${p.isYou?'me':''}">
+      <div class="race-rank">${p.rank}</div>
+      <div class="race-avatar">${p.init}</div>
+      <div class="race-name">${p.isYou?'You':p.name}</div>
+      <div class="race-amt">${fmt(p.amt)}</div>
+    </div>
+  `).join('');
+
+  const overtakeEl = document.getElementById('overtakeBlock');
+  if(above){
+    const gap = above.amt - you.amt;
+    overtakeEl.innerHTML = `Earn <b>${fmt(gap)}</b> more to overtake <b style="color:var(--text-primary); font-family:'Inter',sans-serif; font-size:13px; font-weight:600;">${above.name}</b> at #${above.rank}.`;
+  } else {
+    overtakeEl.innerHTML = `You're #1. Stay ahead.`;
+  }
+}
+
+function renderClimbers(list){
+  const climbers = list
+    .filter(p => (p.prevRank - p.rank) > 0)
+    .sort((a,b)=>(b.prevRank-b.rank)-(a.prevRank-a.rank))
+    .slice(0,4);
+
+  document.getElementById('climbList').innerHTML = climbers.map(p => `
+    <div class="climb-item">
+      <div class="race-avatar">${p.init}</div>
+      <div class="info">
+        <div class="name">${p.isYou?'You':p.name}</div>
+        <div class="jump">&#9650; ${p.prevRank - p.rank} spots today</div>
+      </div>
+    </div>
+  `).join('') || '<div style="font-size:12.5px; color:var(--text-muted);">No movement yet today.</div>';
+
+  document.getElementById('climbersStrip').innerHTML = climbers.slice(0,3).map(p => `
+    <div class="climb-chip"><span class="up">&#9650;${p.prevRank-p.rank}</span> <b>${p.isYou?'You':p.name}</b> jumped to #${p.rank}</div>
+  `).join('');
+}
+
+function renderTabCounts(){
+  document.getElementById('cnt-overall').textContent = people.length;
+  document.getElementById('cnt-solo').textContent = people.filter(p=>!p.team).length;
+  document.getElementById('cnt-team').textContent = people.filter(p=>p.team).length;
+}
+
+function render(){
+  const list = ranked(currentTab);
+  renderPodium(list);
+  renderList(list);
+  renderRace(list);
+  renderClimbers(list);
+  renderTabCounts();
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    currentTab = tab.dataset.tab;
+    render();
+  });
+});
+
+document.getElementById('logBtn').addEventListener('click', async () => {
+  const input=document.getElementById('logInput'), error=document.getElementById('logError'), val=Number(input.value);
+  if(!Number.isFinite(val)||val<=0){error.style.display='block';return}
+  error.style.display='none';
+  const oldRank=ranked(currentTab).find(p=>p.isYou)?.rank||YOU.rank;
+  const button=document.getElementById('logBtn'); button.disabled=true; button.textContent='Saving…';
+  try{
+    await addIncome(val); input.value='';
+    const newRank=ranked(currentTab).find(p=>p.isYou)?.rank||YOU.rank;
+    const jumped=Math.max(0,oldRank-newRank), toast=document.getElementById('toast');
+    toast.textContent=jumped?`You earned ${fmt(val)} and overtook ${jumped} ${jumped===1?'person':'people'}.`:`You added ${fmt(val)}. Keep climbing.`;
+    toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),2600);
+    const row=document.querySelector('.you-row'); if(row){row.classList.add('flash');setTimeout(()=>row.classList.remove('flash'),900)}
+  }catch(e){error.textContent=e.message;error.style.display='block'}
+  finally{button.disabled=false;button.textContent='Add'}
+});
+document.getElementById('logInput').addEventListener('input', () => { document.getElementById('logError').style.display='none'; });
+document.getElementById('logInput').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('logBtn').click(); });
+
+async function loadLeaderboard(){
+  const response=await fetch('/api/leaderboard');
+  if(!response.ok) throw new Error('Failed to load leaderboard');
+  const payload=await response.json();
+  people=payload.participants; YOU=people.find(p=>p.isYou)||null;
+  document.getElementById('dayNow').textContent=payload.challenge.currentDay;
+  document.getElementById('progressFill').style.width=(payload.challenge.currentDay/payload.challenge.totalDays*100)+'%';
+  document.getElementById('progressLabel').textContent=(payload.challenge.totalDays-payload.challenge.currentDay)+' days left';
+  render();
+}
+async function addIncome(amount){
+  const response=await fetch('/api/earnings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({participantId:YOU.id,amount})});
+  const payload=await response.json();
+  if(!response.ok) throw new Error(payload.error||'Unable to add income');
+  people=payload.participants; YOU=people.find(p=>p.isYou)||YOU; render(); return payload;
+}
+loadLeaderboard().catch(error=>{console.error(error);document.getElementById('list').innerHTML='<div style="padding:24px 6px;color:#E0897A;font-size:13px">Unable to load the leaderboard. Start the backend and refresh.</div>';});
+</script>
+
+</body>
+</html>

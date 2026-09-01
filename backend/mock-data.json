@@ -1,0 +1,712 @@
+{
+  "challenge": {
+    "name": "EYFI Student Earning Challenge",
+    "wave": "Wave 01",
+    "currentDay": 14,
+    "totalDays": 30,
+    "prizes": [
+      {
+        "rank": "#1",
+        "amount": 30000
+      },
+      {
+        "rank": "#2",
+        "amount": 20000
+      },
+      {
+        "rank": "#3",
+        "amount": 10000
+      },
+      {
+        "rank": "#4–8",
+        "amount": 5000
+      },
+      {
+        "rank": "#9–13",
+        "amount": 2000
+      },
+      {
+        "rank": "#14–25",
+        "amount": 1000
+      },
+      {
+        "rank": "#26–100",
+        "amount": 1000
+      }
+    ]
+  },
+  "participants": [
+    {
+      "id": 1,
+      "name": "Ananya Rao",
+      "init": "AR",
+      "college": "IIT Hyderabad",
+      "cat": "Freelance web dev",
+      "streak": 12,
+      "team": false,
+      "amt": 24800,
+      "yesterdayAmt": 22100
+    },
+    {
+      "id": 2,
+      "name": "Karthik Iyer",
+      "init": "KI",
+      "college": "VIT Vellore",
+      "cat": "Reels editing",
+      "streak": 9,
+      "team": false,
+      "amt": 21200,
+      "yesterdayAmt": 17400
+    },
+    {
+      "id": 3,
+      "name": "Team Hustlers",
+      "init": "TH",
+      "college": "BITS Pilani",
+      "cat": "Event photography",
+      "streak": 11,
+      "team": true,
+      "amt": 19750,
+      "yesterdayAmt": 19000
+    },
+    {
+      "id": 4,
+      "name": "Meera Nair",
+      "init": "MN",
+      "college": "Christ University",
+      "cat": "Notes selling",
+      "streak": 8,
+      "team": false,
+      "amt": 15300,
+      "yesterdayAmt": 15100
+    },
+    {
+      "id": 5,
+      "name": "Team Grindset",
+      "init": "TG",
+      "college": "IIT Madras",
+      "cat": "No-code app building",
+      "streak": 6,
+      "team": true,
+      "amt": 14100,
+      "yesterdayAmt": 10800
+    },
+    {
+      "id": 6,
+      "name": "Rohan Verma",
+      "init": "RV",
+      "college": "NIT Warangal",
+      "cat": "Bug bounty hunting",
+      "streak": 10,
+      "team": false,
+      "amt": 13650,
+      "yesterdayAmt": 13900
+    },
+    {
+      "id": 7,
+      "name": "Divya Sharma",
+      "init": "DS",
+      "college": "Manipal University",
+      "cat": "Baking and desserts",
+      "streak": 5,
+      "team": false,
+      "amt": 12980,
+      "yesterdayAmt": 12500
+    },
+    {
+      "id": 8,
+      "name": "Aditya Kulkarni",
+      "init": "AK",
+      "college": "Pune University",
+      "cat": "AI chatbot building",
+      "streak": 7,
+      "team": false,
+      "amt": 11400,
+      "yesterdayAmt": 9700
+    },
+    {
+      "id": 9,
+      "name": "Sneha Pillai",
+      "init": "SP",
+      "college": "SRM University",
+      "cat": "Resume writing",
+      "streak": 4,
+      "team": false,
+      "amt": 10850,
+      "yesterdayAmt": 11000
+    },
+    {
+      "id": 10,
+      "name": "Team Sidehustle",
+      "init": "TS",
+      "college": "Delhi University",
+      "cat": "Thrift reselling",
+      "streak": 9,
+      "team": true,
+      "amt": 9990,
+      "yesterdayAmt": 9500
+    },
+    {
+      "id": 11,
+      "name": "Vikram Singh",
+      "init": "VS",
+      "college": "Amity University",
+      "cat": "Tutoring",
+      "streak": 3,
+      "team": false,
+      "amt": 8700,
+      "yesterdayAmt": 7900
+    },
+    {
+      "id": 12,
+      "name": "Priya Menon",
+      "init": "PM",
+      "college": "NIFT Bengaluru",
+      "cat": "Handmade jewellery",
+      "streak": 6,
+      "team": false,
+      "amt": 8420,
+      "yesterdayAmt": 8600
+    },
+    {
+      "id": 100,
+      "name": "Ishaan Gupta",
+      "init": "IG",
+      "college": "IIT Delhi",
+      "cat": "Web development",
+      "streak": 2,
+      "team": true,
+      "amt": 8200,
+      "yesterdayAmt": 7700
+    },
+    {
+      "id": 101,
+      "name": "Neha Reddy",
+      "init": "NR",
+      "college": "NIT Trichy",
+      "cat": "SEO automation pipelines",
+      "streak": 3,
+      "team": false,
+      "amt": 8092,
+      "yesterdayAmt": 7492
+    },
+    {
+      "id": 102,
+      "name": "Arjun Joshi",
+      "init": "AJ",
+      "college": "BITS Goa",
+      "cat": "App development",
+      "streak": 4,
+      "team": false,
+      "amt": 7984,
+      "yesterdayAmt": 7284
+    },
+    {
+      "id": 103,
+      "name": "Kavya Chawla",
+      "init": "KC",
+      "college": "VIT Chennai",
+      "cat": "Tutoring",
+      "streak": 5,
+      "team": false,
+      "amt": 7876,
+      "yesterdayAmt": 7076
+    },
+    {
+      "id": 104,
+      "name": "Yash Bose",
+      "init": "YB",
+      "college": "IIT Delhi",
+      "cat": "Newsletter writing",
+      "streak": 6,
+      "team": false,
+      "amt": 7768,
+      "yesterdayAmt": 7268
+    },
+    {
+      "id": 105,
+      "name": "Riya Nambiar",
+      "init": "RN",
+      "college": "NIT Trichy",
+      "cat": "Web development",
+      "streak": 7,
+      "team": false,
+      "amt": 7660,
+      "yesterdayAmt": 7060
+    },
+    {
+      "id": 106,
+      "name": "Dev Patel",
+      "init": "DP",
+      "college": "BITS Goa",
+      "cat": "SEO automation pipelines",
+      "streak": 8,
+      "team": false,
+      "amt": 7552,
+      "yesterdayAmt": 6852
+    },
+    {
+      "id": 107,
+      "name": "Simran Desai",
+      "init": "SD",
+      "college": "VIT Chennai",
+      "cat": "App development",
+      "streak": 9,
+      "team": false,
+      "amt": 7444,
+      "yesterdayAmt": 6644
+    },
+    {
+      "id": 108,
+      "name": "Aryan Malhotra",
+      "init": "AM",
+      "college": "IIT Delhi",
+      "cat": "Tutoring",
+      "streak": 10,
+      "team": false,
+      "amt": 7076,
+      "yesterdayAmt": 6576
+    },
+    {
+      "id": 109,
+      "name": "Pooja Kapoor",
+      "init": "PK",
+      "college": "NIT Trichy",
+      "cat": "Newsletter writing",
+      "streak": 11,
+      "team": true,
+      "amt": 6968,
+      "yesterdayAmt": 6368
+    },
+    {
+      "id": 110,
+      "name": "Manav Verma",
+      "init": "MV",
+      "college": "BITS Goa",
+      "cat": "Web development",
+      "streak": 12,
+      "team": false,
+      "amt": 6860,
+      "yesterdayAmt": 6160
+    },
+    {
+      "id": 111,
+      "name": "Nikita Shetty",
+      "init": "NS",
+      "college": "VIT Chennai",
+      "cat": "SEO automation pipelines",
+      "streak": 13,
+      "team": false,
+      "amt": 6752,
+      "yesterdayAmt": 5952
+    },
+    {
+      "id": 112,
+      "name": "Ishaan Gupta",
+      "init": "IG",
+      "college": "IIT Delhi",
+      "cat": "App development",
+      "streak": 2,
+      "team": false,
+      "amt": 6644,
+      "yesterdayAmt": 6144
+    },
+    {
+      "id": 113,
+      "name": "Neha Reddy",
+      "init": "NR",
+      "college": "NIT Trichy",
+      "cat": "Tutoring",
+      "streak": 3,
+      "team": false,
+      "amt": 6536,
+      "yesterdayAmt": 5936
+    },
+    {
+      "id": 114,
+      "name": "Arjun Joshi",
+      "init": "AJ",
+      "college": "BITS Goa",
+      "cat": "Newsletter writing",
+      "streak": 4,
+      "team": false,
+      "amt": 6428,
+      "yesterdayAmt": 5728
+    },
+    {
+      "id": 115,
+      "name": "Kavya Chawla",
+      "init": "KC",
+      "college": "VIT Chennai",
+      "cat": "Web development",
+      "streak": 5,
+      "team": false,
+      "amt": 6060,
+      "yesterdayAmt": 5260
+    },
+    {
+      "id": 116,
+      "name": "Yash Bose",
+      "init": "YB",
+      "college": "IIT Delhi",
+      "cat": "SEO automation pipelines",
+      "streak": 6,
+      "team": false,
+      "amt": 5952,
+      "yesterdayAmt": 5452
+    },
+    {
+      "id": 117,
+      "name": "Riya Nambiar",
+      "init": "RN",
+      "college": "NIT Trichy",
+      "cat": "App development",
+      "streak": 7,
+      "team": false,
+      "amt": 5844,
+      "yesterdayAmt": 5244
+    },
+    {
+      "id": 118,
+      "name": "Dev Patel",
+      "init": "DP",
+      "college": "BITS Goa",
+      "cat": "Tutoring",
+      "streak": 8,
+      "team": true,
+      "amt": 5736,
+      "yesterdayAmt": 5036
+    },
+    {
+      "id": 119,
+      "name": "Simran Desai",
+      "init": "SD",
+      "college": "VIT Chennai",
+      "cat": "Newsletter writing",
+      "streak": 9,
+      "team": false,
+      "amt": 5628,
+      "yesterdayAmt": 4828
+    },
+    {
+      "id": 120,
+      "name": "Aryan Malhotra",
+      "init": "AM",
+      "college": "IIT Delhi",
+      "cat": "Web development",
+      "streak": 10,
+      "team": false,
+      "amt": 5520,
+      "yesterdayAmt": 5020
+    },
+    {
+      "id": 121,
+      "name": "Pooja Kapoor",
+      "init": "PK",
+      "college": "NIT Trichy",
+      "cat": "SEO automation pipelines",
+      "streak": 11,
+      "team": false,
+      "amt": 5412,
+      "yesterdayAmt": 4812
+    },
+    {
+      "id": 122,
+      "name": "Manav Verma",
+      "init": "MV",
+      "college": "BITS Goa",
+      "cat": "App development",
+      "streak": 12,
+      "team": false,
+      "amt": 5044,
+      "yesterdayAmt": 4344
+    },
+    {
+      "id": 123,
+      "name": "Nikita Shetty",
+      "init": "NS",
+      "college": "VIT Chennai",
+      "cat": "Tutoring",
+      "streak": 13,
+      "team": false,
+      "amt": 4936,
+      "yesterdayAmt": 4136
+    },
+    {
+      "id": 124,
+      "name": "Ishaan Gupta",
+      "init": "IG",
+      "college": "IIT Delhi",
+      "cat": "Newsletter writing",
+      "streak": 2,
+      "team": false,
+      "amt": 4828,
+      "yesterdayAmt": 4328
+    },
+    {
+      "id": 125,
+      "name": "Neha Reddy",
+      "init": "NR",
+      "college": "NIT Trichy",
+      "cat": "Web development",
+      "streak": 3,
+      "team": false,
+      "amt": 4720,
+      "yesterdayAmt": 4120
+    },
+    {
+      "id": 126,
+      "name": "Arjun Joshi",
+      "init": "AJ",
+      "college": "BITS Goa",
+      "cat": "SEO automation pipelines",
+      "streak": 4,
+      "team": false,
+      "amt": 4612,
+      "yesterdayAmt": 3912
+    },
+    {
+      "id": 127,
+      "name": "Kavya Chawla",
+      "init": "KC",
+      "college": "VIT Chennai",
+      "cat": "App development",
+      "streak": 5,
+      "team": true,
+      "amt": 4504,
+      "yesterdayAmt": 3704
+    },
+    {
+      "id": 128,
+      "name": "Yash Bose",
+      "init": "YB",
+      "college": "IIT Delhi",
+      "cat": "Tutoring",
+      "streak": 6,
+      "team": false,
+      "amt": 4396,
+      "yesterdayAmt": 3896
+    },
+    {
+      "id": 129,
+      "name": "Riya Nambiar",
+      "init": "RN",
+      "college": "NIT Trichy",
+      "cat": "Newsletter writing",
+      "streak": 7,
+      "team": false,
+      "amt": 4028,
+      "yesterdayAmt": 3428
+    },
+    {
+      "id": 130,
+      "name": "Dev Patel",
+      "init": "DP",
+      "college": "BITS Goa",
+      "cat": "Web development",
+      "streak": 8,
+      "team": false,
+      "amt": 3920,
+      "yesterdayAmt": 3220
+    },
+    {
+      "id": 131,
+      "name": "Simran Desai",
+      "init": "SD",
+      "college": "VIT Chennai",
+      "cat": "SEO automation pipelines",
+      "streak": 9,
+      "team": false,
+      "amt": 3812,
+      "yesterdayAmt": 3012
+    },
+    {
+      "id": 132,
+      "name": "Aryan Malhotra",
+      "init": "AM",
+      "college": "IIT Delhi",
+      "cat": "App development",
+      "streak": 10,
+      "team": false,
+      "amt": 3704,
+      "yesterdayAmt": 3204
+    },
+    {
+      "id": 46,
+      "name": "Divya Nair",
+      "init": "DN",
+      "college": "VIT Vellore",
+      "cat": "Tutoring",
+      "streak": 5,
+      "team": false,
+      "amt": 3311,
+      "yesterdayAmt": 2750
+    },
+    {
+      "id": 9999,
+      "name": "You",
+      "init": "SB",
+      "college": "Your College",
+      "cat": "Prompt engineering services",
+      "streak": 24,
+      "team": false,
+      "amt": 7625,
+      "yesterdayAmt": 6625,
+      "isYou": true
+    },
+    {
+      "id": 48,
+      "name": "Aditya Kulkarni",
+      "init": "AK",
+      "college": "Pune University",
+      "cat": "AI chatbot building",
+      "streak": 7,
+      "team": false,
+      "amt": 3221,
+      "yesterdayAmt": 2650
+    },
+    {
+      "id": 49,
+      "name": "Sneha Pillai",
+      "init": "SP",
+      "college": "SRM University",
+      "cat": "Resume writing",
+      "streak": 4,
+      "team": false,
+      "amt": 3100,
+      "yesterdayAmt": 2550
+    },
+    {
+      "id": 50,
+      "name": "Vikram Singh",
+      "init": "VS",
+      "college": "Amity University",
+      "cat": "Tutoring",
+      "streak": 3,
+      "team": false,
+      "amt": 2950,
+      "yesterdayAmt": 2400
+    },
+    {
+      "id": 51,
+      "name": "Priya Menon",
+      "init": "PM",
+      "college": "NIFT Bengaluru",
+      "cat": "Handmade jewellery",
+      "streak": 6,
+      "team": false,
+      "amt": 2800,
+      "yesterdayAmt": 2300
+    },
+    {
+      "id": 200,
+      "name": "Participant 1",
+      "init": "P1",
+      "college": "Student College",
+      "cat": "Virtual assistance",
+      "streak": 1,
+      "team": true,
+      "amt": 2650,
+      "yesterdayAmt": 2400
+    },
+    {
+      "id": 201,
+      "name": "Participant 2",
+      "init": "P2",
+      "college": "Student College",
+      "cat": "Thrift reselling",
+      "streak": 2,
+      "team": false,
+      "amt": 2470,
+      "yesterdayAmt": 2240
+    },
+    {
+      "id": 202,
+      "name": "Participant 3",
+      "init": "P3",
+      "college": "Student College",
+      "cat": "Freelance tech gigs",
+      "streak": 3,
+      "team": false,
+      "amt": 2290,
+      "yesterdayAmt": 2080
+    },
+    {
+      "id": 203,
+      "name": "Participant 4",
+      "init": "P4",
+      "college": "Student College",
+      "cat": "Virtual assistance",
+      "streak": 4,
+      "team": false,
+      "amt": 2110,
+      "yesterdayAmt": 1920
+    },
+    {
+      "id": 204,
+      "name": "Participant 5",
+      "init": "P5",
+      "college": "Student College",
+      "cat": "Thrift reselling",
+      "streak": 5,
+      "team": false,
+      "amt": 1930,
+      "yesterdayAmt": 1760
+    },
+    {
+      "id": 205,
+      "name": "Participant 6",
+      "init": "P6",
+      "college": "Student College",
+      "cat": "Freelance tech gigs",
+      "streak": 6,
+      "team": true,
+      "amt": 1750,
+      "yesterdayAmt": 1600
+    },
+    {
+      "id": 206,
+      "name": "Participant 7",
+      "init": "P7",
+      "college": "Student College",
+      "cat": "Virtual assistance",
+      "streak": 1,
+      "team": false,
+      "amt": 1570,
+      "yesterdayAmt": 1440
+    },
+    {
+      "id": 207,
+      "name": "Participant 8",
+      "init": "P8",
+      "college": "Student College",
+      "cat": "Thrift reselling",
+      "streak": 2,
+      "team": false,
+      "amt": 1390,
+      "yesterdayAmt": 1280
+    },
+    {
+      "id": 208,
+      "name": "Participant 9",
+      "init": "P9",
+      "college": "Student College",
+      "cat": "Freelance tech gigs",
+      "streak": 3,
+      "team": false,
+      "amt": 1210,
+      "yesterdayAmt": 1120
+    },
+    {
+      "id": 209,
+      "name": "Participant 10",
+      "init": "P10",
+      "college": "Student College",
+      "cat": "Virtual assistance",
+      "streak": 4,
+      "team": false,
+      "amt": 1030,
+      "yesterdayAmt": 960
+    }
+  ]
+}
